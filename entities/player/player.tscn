@@ -1,0 +1,179 @@
+[gd_scene load_steps=29 format=3 uid="uid://ch1rqa0wsowvq"]
+
+[ext_resource type="Script" path="res://entities/player/Player.gd" id="1_qwj4k"]
+[ext_resource type="PackedScene" uid="uid://do3oje7yxixx0" path="res://entities/player/PlayerModel.tscn" id="2_suclw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ho8uo"]
+radius = 0.566603
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cxv3"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_442o8"]
+material = SubResource("StandardMaterial3D_6cxv3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdjew"]
+albedo_color = Color(1, 0.121569, 0.25098, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j2pjd"]
+material = SubResource("StandardMaterial3D_jdjew")
+size = Vector3(0.15, 0.15, 0.424)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mga8s"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jc20s"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8c7if"]
+animation = &"Jump_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1qh2u"]
+animation = &"Jump_Land"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4vnvp"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ir1oh"]
+xfade_time = 0.1
+advance_expression = "actual_speed > RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v58fr"]
+xfade_time = 0.1
+advance_expression = "actual_speed < RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aeibc"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pcobv"]
+advance_expression = "not is_on_floor() && velocity.y < -1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16kse"]
+advance_expression = "not is_on_floor() && velocity.y < -1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_65uiu"]
+advance_expression = "jumping && not is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bvtb2"]
+advance_expression = "jumping && not is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bgfqc"]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ilnnx"]
+advance_expression = "is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ggdq3"]
+switch_mode = 2
+advance_expression = "actual_speed < RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oaiuj"]
+switch_mode = 2
+advance_expression = "actual_speed >= RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wuhtu"]
+advance_expression = "is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_87r1x"]
+states/Idle/node = SubResource("AnimationNodeAnimation_mga8s")
+states/Idle/position = Vector2(363, 11)
+states/Jump/node = SubResource("AnimationNodeAnimation_jc20s")
+states/Jump/position = Vector2(209, -133)
+states/Jump_Idle/node = SubResource("AnimationNodeAnimation_8c7if")
+states/Jump_Idle/position = Vector2(368, -221)
+states/Jump_Land/node = SubResource("AnimationNodeAnimation_1qh2u")
+states/Jump_Land/position = Vector2(560, -133)
+states/Run/node = SubResource("AnimationNodeAnimation_4vnvp")
+states/Run/position = Vector2(560, 11)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_ir1oh"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_v58fr"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_aeibc"), "Idle", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_pcobv"), "Run", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_16kse"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_65uiu"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_bvtb2"), "Jump", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_bgfqc"), "Jump_Idle", "Jump_Land", SubResource("AnimationNodeStateMachineTransition_ilnnx"), "Jump_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_ggdq3"), "Jump_Land", "Run", SubResource("AnimationNodeStateMachineTransition_oaiuj"), "Jump", "Jump_Land", SubResource("AnimationNodeStateMachineTransition_wuhtu")]
+graph_offset = Vector2(-151, -156)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ph61w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2datu"]
+radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ml0af"]
+radius = 15.0
+
+[node name="Player" type="CharacterBody3D"]
+collision_priority = 5.0
+script = ExtResource("1_qwj4k")
+speed = 6.0
+jump_speed = 9.0
+rotate_speed = 25.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.965933, 0)
+shape = SubResource("CapsuleShape3D_ho8uo")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Capsule" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.970859, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_442o8")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Capsule"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.215, 0.306, -0.572885)
+mesh = SubResource("BoxMesh_j2pjd")
+
+[node name="Birb" parent="Model" instance=ExtResource("2_suclw")]
+transform = Transform3D(-0.6, 0, -9.05975e-08, 0, 0.6, 0, 9.05975e-08, 0, -0.6, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Birb/CharacterArmature" index="0"]
+bones/2/position = Vector3(0.00215298, 0.844411, 0.167574)
+bones/4/rotation = Quaternion(0.166832, 4.319e-07, 1.0312e-07, 0.985985)
+bones/5/rotation = Quaternion(0.0873788, -8.28631e-07, 1.41812e-08, 0.996175)
+bones/6/rotation = Quaternion(0.351925, 9.69401e-07, 1.50234e-07, 0.936028)
+bones/7/rotation = Quaternion(-0.378065, -0.00025536, 0.00010373, 0.925779)
+bones/8/position = Vector3(0.179708, 0.275377, 0.0538108)
+bones/8/rotation = Quaternion(-0.139272, -0.0219855, -0.41045, 0.900917)
+bones/10/rotation = Quaternion(0.0122249, 0.26632, -0.210781, 0.940476)
+bones/13/rotation = Quaternion(-0.106641, -0.000921956, 0.00859735, 0.99426)
+bones/18/rotation = Quaternion(0.0422539, 0.0256417, 0.232305, 0.971386)
+bones/19/rotation = Quaternion(-0.0766121, -0.00152706, -0.0198675, 0.996862)
+bones/21/rotation = Quaternion(-0.0116282, 0.00252354, 0.212192, 0.977155)
+bones/22/position = Vector3(-0.178431, 0.275377, 0.0538111)
+bones/22/rotation = Quaternion(-0.139272, 0.021986, 0.41045, 0.900917)
+bones/24/rotation = Quaternion(0.012225, -0.26632, 0.210781, 0.940476)
+bones/26/rotation = Quaternion(-0.0283748, 0.00482237, 0.167482, 0.985455)
+bones/33/rotation = Quaternion(-0.0766122, 0.00152705, 0.0198675, 0.996862)
+bones/36/rotation = Quaternion(0.96707, 0.00886246, 0.00201856, 0.254347)
+bones/37/rotation = Quaternion(0.50465, 0.00619682, 0.00859622, 0.863259)
+bones/38/rotation = Quaternion(0.96707, -0.00886255, -0.00201769, 0.254347)
+bones/39/rotation = Quaternion(0.50465, -0.00619684, -0.00859625, 0.863259)
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_87r1x")
+anim_player = NodePath("../Model/Birb/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ph61w")
+
+[node name="Interactor" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_2datu")
+target_position = Vector3(0, 1, 0)
+max_results = 10
+collision_mask = 2
+debug_shape_custom_color = Color(0.54902, 0.733333, 0.301961, 1)
+
+[node name="Inspector" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57526, 0)
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Inspector"]
+shape = SubResource("SphereShape3D_ml0af")
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="animation_player_changed" from="AnimationTree" to="." method="_on_animation_tree_animation_player_changed"]
+[connection signal="area_entered" from="Inspector" to="." method="_on_inspector_area_entered"]
+[connection signal="area_exited" from="Inspector" to="." method="_on_inspector_area_exited"]
+
+[editable path="Model/Birb"]

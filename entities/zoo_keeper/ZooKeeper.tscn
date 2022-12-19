@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=3 uid="uid://g4glruarekcc"]
+
+[ext_resource type="PackedScene" uid="uid://cfcgo3uajh08" path="res://entities/zoo_keeper/AdventurerCharacter.tscn" id="1_tlsix"]
+[ext_resource type="Script" path="res://entities/zoo_keeper/AnimChanger.gd" id="2_eog62"]
+[ext_resource type="PackedScene" uid="uid://d320fkhyqy8hk" path="res://scripts/scenes/interactable.tscn" id="3_a72kx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ayoq0"]
+radius = 0.767777
+height = 3.70437
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pocv2"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3udoo"]
+animation = &"Wave"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elt32"]
+animation = &"Idle_Neutral"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_6v11u"]
+resource_name = "idle"
+blend_point_0/node = SubResource("AnimationNodeAnimation_pocv2")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_3udoo")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_elt32")
+blend_point_2/pos = 2.0
+min_space = 0.0
+max_space = 2.0
+snap = 1.0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kmor2"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_64feh"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_6v11u")
+states/Idle/position = Vector2(382, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_kmor2")]
+graph_offset = Vector2(-171, -16)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_7tgda"]
+
+[node name="ZooKeeper" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0117173, 1.84616, 0.279376)
+shape = SubResource("CapsuleShape3D_ayoq0")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="AdventurerCharacter" parent="Model" instance=ExtResource("1_tlsix")]
+
+[node name="Skeleton3D" parent="Model/AdventurerCharacter/CharacterArmature" index="0"]
+bones/1/position = Vector3(0.000453209, 0.943208, -0.00399487)
+bones/1/rotation = Quaternion(-4.83071e-05, 0.23553, 0.000199329, 0.971867)
+bones/4/rotation = Quaternion(0.153868, -0.237706, -0.00529317, 0.959058)
+bones/5/rotation = Quaternion(-0.00978053, 8.49641e-07, 4.43559e-05, 0.999952)
+bones/6/rotation = Quaternion(-0.00947105, 1.6243e-10, -1.89102e-10, 0.999955)
+bones/7/rotation = Quaternion(-0.0049972, 2.51692e-05, 2.39457e-05, 0.999988)
+bones/8/rotation = Quaternion(-0.269814, -0.417607, -0.40977, 0.764783)
+bones/9/rotation = Quaternion(-0.729453, -0.0504833, -0.169651, 0.660733)
+bones/10/rotation = Quaternion(-0.118253, -0.0252012, -0.201385, 0.972021)
+bones/11/rotation = Quaternion(0.00930064, 0.00630404, 0.0231915, 0.999668)
+bones/13/rotation = Quaternion(0.0112644, 0.148256, 0.0909846, 0.98469)
+bones/14/rotation = Quaternion(-0.0685403, -0.00243829, 0.0215403, 0.997413)
+bones/15/rotation = Quaternion(-0.0302401, 0.0127248, 0.00602093, 0.999444)
+bones/17/rotation = Quaternion(-0.0533958, 0.0587854, 0.000253428, 0.996842)
+bones/18/rotation = Quaternion(-0.119683, -0.00445013, -0.02103, 0.992579)
+bones/19/rotation = Quaternion(-0.0190482, 0.0352492, -0.00743691, 0.999169)
+bones/21/rotation = Quaternion(-0.0439309, 0.106429, -0.0408442, 0.992509)
+bones/22/rotation = Quaternion(-0.119294, 0.0572576, -0.0398883, 0.990404)
+bones/23/rotation = Quaternion(-0.0748089, 0.0279542, -0.00762858, 0.996777)
+bones/25/rotation = Quaternion(-0.0767444, 0.060566, -0.181199, 0.978575)
+bones/26/rotation = Quaternion(-0.0894857, -0.0379283, -0.022308, 0.995016)
+bones/27/rotation = Quaternion(-0.116958, -0.00965458, -0.00323036, 0.993085)
+bones/28/rotation = Quaternion(-0.317099, -0.317893, -0.180712, 0.875063)
+bones/29/rotation = Quaternion(0.0932465, 0.266269, 0.00408928, 0.959369)
+bones/30/rotation = Quaternion(-0.102233, 0.0330765, 0.147436, 0.983218)
+bones/31/rotation = Quaternion(-0.269814, 0.417607, 0.40977, 0.764783)
+bones/32/rotation = Quaternion(-0.72933, 0.177745, 0.10426, 0.652391)
+bones/33/rotation = Quaternion(-0.208971, -0.202495, 0.331891, 0.897316)
+bones/34/rotation = Quaternion(0.00822544, -0.00981952, -0.0520068, 0.998565)
+bones/36/rotation = Quaternion(-0.0162477, -0.144091, -0.094652, 0.984893)
+bones/37/rotation = Quaternion(-0.0919627, 0.00305185, -0.0204528, 0.995548)
+bones/38/rotation = Quaternion(-0.0302401, -0.0127248, -0.00602094, 0.999444)
+bones/40/rotation = Quaternion(-0.0655948, -0.0573822, -0.0749482, 0.993372)
+bones/41/rotation = Quaternion(-0.120008, 0.00437157, 0.0210206, 0.992541)
+bones/42/rotation = Quaternion(-0.0190482, -0.0352493, 0.00743692, 0.999169)
+bones/44/rotation = Quaternion(-0.0439309, -0.106429, 0.0408442, 0.992509)
+bones/45/rotation = Quaternion(-0.119294, -0.0572576, 0.0398883, 0.990404)
+bones/46/rotation = Quaternion(-0.0748089, -0.0279542, 0.0076286, 0.996777)
+bones/47/rotation = Quaternion(-0.0310906, 0.0273529, -0.227078, 0.972996)
+bones/48/rotation = Quaternion(-0.0766031, -0.0608134, 0.182085, 0.978406)
+bones/49/rotation = Quaternion(-0.0894857, 0.0379283, 0.022308, 0.995016)
+bones/50/rotation = Quaternion(-0.116958, 0.00965457, 0.00323036, 0.993085)
+bones/51/rotation = Quaternion(-0.254289, 0.351549, 0.248254, 0.866095)
+bones/52/rotation = Quaternion(0.097309, -0.262446, -0.00278174, 0.960024)
+bones/53/rotation = Quaternion(-0.173262, -0.0291871, -0.140996, 0.974294)
+bones/54/rotation = Quaternion(0.969085, 0.0737021, -0.222737, 0.0763605)
+bones/55/rotation = Quaternion(0.222704, 3.71117e-09, 1.98107e-09, 0.974886)
+bones/56/rotation = Quaternion(0.968004, -0.01606, 0.171282, 0.182684)
+bones/57/rotation = Quaternion(0.195537, 1.16508e-08, 4.33495e-09, 0.980696)
+bones/58/position = Vector3(0.0968591, 0.0227517, -0.187028)
+bones/58/rotation = Quaternion(0.614423, 0.348027, -0.34617, 0.617679)
+bones/59/position = Vector3(0.544518, 0.650245, 0.227107)
+bones/60/position = Vector3(-0.0447745, 0.0227546, 0.173686)
+bones/61/position = Vector3(0.00556506, 0.446997, 0.658934)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_64feh")
+anim_player = NodePath("../Model/AdventurerCharacter/AnimationPlayer")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_7tgda")
+parameters/Idle/blend_position = 0.00935308
+
+[node name="AnimChanger" type="Node" parent="."]
+script = ExtResource("2_eog62")
+rand_values = [0, 0, 0, 0, 0, 2, 2, 2, 2, 1]
+animation_tree = NodePath("../AnimationTree")
+parameter = "parameters/Idle/blend_position"
+
+[node name="Interactable" parent="." instance=ExtResource("3_a72kx")]
+dialouge = "Welcome to the motion planning zoo! It is a 3d demonstration environment filled with creatures of different motion plans. The idea of this project is house different motion planning algorithms all in one place for a convenient demo on how different algorithms work."
+
+[node name="CamTarget" parent="Interactable" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.964732, 0.263233, 0, -0.263233, 0.964732, -1.2588e-07, 3.304, 4.7104)
+
+[node name="CollisionShape3D" parent="Interactable" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20365, 0)
+
+[connection signal="animation_finished" from="Model/AdventurerCharacter/AnimationPlayer" to="AnimChanger" method="_on_animation_player_animation_finished"]
+
+[editable path="Model/AdventurerCharacter"]
+[editable path="Interactable"]

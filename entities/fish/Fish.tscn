@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbetfpgxgvld0"]
+
+[ext_resource type="Script" path="res://Fish.gd" id="1_u3d3a"]
+[ext_resource type="PackedScene" uid="uid://c5n0hwioch516" path="res://entities/fish/betta.tscn" id="2_b3dcc"]
+[ext_resource type="PackedScene" uid="uid://dojtjms06kcj2" path="res://scripts/scenes/inspectable.tscn" id="3_ojbiw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_76f0q"]
+radius = 0.845518
+height = 2.98867
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3r60u"]
+animation = &"Swimming_Fast"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hs5nl"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lho4o"]
+states/Swimming_Fast/node = SubResource("AnimationNodeAnimation_3r60u")
+states/Swimming_Fast/position = Vector2(469, 100)
+transitions = ["Start", "Swimming_Fast", SubResource("AnimationNodeStateMachineTransition_hs5nl")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_4beyo"]
+
+[node name="Fish" type="CharacterBody3D"]
+script = ExtResource("1_u3d3a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.569892)
+shape = SubResource("CapsuleShape3D_76f0q")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Betta" parent="Model" instance=ExtResource("2_b3dcc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Betta/Fish_Armature" index="0"]
+bones/0/rotation = Quaternion(-0.706756, 0.0223517, 0.0223562, 0.706751)
+bones/1/rotation = Quaternion(-0.00349169, 0.029972, 0.035776, 0.998904)
+bones/2/rotation = Quaternion(-3.11442e-06, -3.11368e-06, 0.037232, 0.999307)
+bones/3/rotation = Quaternion(-0.00793278, -0.00115575, 0.11879, 0.992887)
+bones/4/rotation = Quaternion(0.00797348, -0.000503017, 0.0629575, 0.997984)
+bones/5/rotation = Quaternion(-1.23566e-08, -1.12832e-08, -0.0384831, 0.999259)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_lho4o")
+anim_player = NodePath("../Model/Betta/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_4beyo")
+
+[node name="Inspectable" parent="." instance=ExtResource("3_ojbiw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58864, 0)
+inspect_name = "Path Following Fish"
+inspect_description = "This is the path following fish. Trying to get movement in water is difficult because the fish don’t need gravity in the water, but they do outside of the water. Future work is to get the fish to jump above water every now and then. Currently, they follow a predefined path and interpolate from point to point."
+
+[editable path="Model/Betta"]

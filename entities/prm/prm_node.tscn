@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bx4pctkxkjmgb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckev3"]
+albedo_color = Color(0, 0.647059, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6hky8"]
+material = SubResource("StandardMaterial3D_ckev3")
+height = 0.1
+
+[node name="PRMNode" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CylinderMesh_6hky8")

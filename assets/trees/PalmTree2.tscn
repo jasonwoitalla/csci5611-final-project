@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg0u6j6tmtpf0"]
+
+[ext_resource type="PackedScene" uid="uid://db21ac52se204" path="res://assets/trees/PalmTree_2.glb" id="1_8ml4s"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ous7q"]
+height = 11.8524
+radius = 1.60912
+
+[node name="PalmTree_2" instance=ExtResource("1_8ml4s")]
+
+[node name="PalmTree_22" parent="." index="0"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.26373, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.878525, 0.524943, 0)
+shape = SubResource("CylinderShape3D_ous7q")

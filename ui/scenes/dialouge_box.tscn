@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://ihoqewycub84"]
+
+[ext_resource type="Texture2D" uid="uid://drmovqujgcrti" path="res://ui/dialouge_box.png" id="1_hb2j8"]
+[ext_resource type="Script" path="res://ui/scripts/dialouge_box.gd" id="1_nwwen"]
+[ext_resource type="FontFile" uid="uid://cxv831br37htl" path="res://ui/fonts/ACMESecretAgentBB_Reg.ttf" id="2_kwpiw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82ejv"]
+
+[sub_resource type="Theme" id="Theme_s6yru"]
+default_font = ExtResource("2_kwpiw")
+default_font_size = 48
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 48
+Label/styles/normal = SubResource("StyleBoxEmpty_82ejv")
+
+[node name="DialougeBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nwwen")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = 0.523
+anchor_top = 1.0
+anchor_right = 0.523
+anchor_bottom = 1.0
+offset_left = -375.496
+offset_top = -226.0
+offset_right = 374.504
+offset_bottom = -26.0
+texture = ExtResource("1_hb2j8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect"]
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 1392.0
+offset_bottom = 374.0
+scale = Vector2(0.5, 0.5)
+theme = SubResource("Theme_s6yru")
+text = "Hello World how are you doing here today??"
+scroll_active = false
+
+[node name="Button" type="Button" parent="TextureRect"]
+offset_left = 705.0
+offset_top = 6.0
+offset_right = 743.0
+offset_bottom = 44.0
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]

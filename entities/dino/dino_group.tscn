@@ -1,0 +1,125 @@
+[gd_scene load_steps=2 format=3 uid="uid://c22w6twmam4rc"]
+
+[ext_resource type="PackedScene" uid="uid://4xsuoljkogq5" path="res://entities/dino/DinoEnemy.tscn" id="1_grwmn"]
+
+[node name="DinoGroup" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.4848, 0, -23.4519)
+
+[node name="DinoEnemy" parent="." instance=ExtResource("1_grwmn")]
+
+[node name="DinoEnemy2" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64391, 0, -2.92071)
+
+[node name="DinoEnemy3" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64391, 0, 1.35034)
+
+[node name="DinoEnemy4" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.08562, 0, 1.35034)
+
+[node name="DinoEnemy5" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.686522, 0, -6.42237)
+
+[node name="DinoEnemy6" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34031, 0, -2.40011)
+
+[node name="DinoEnemy7" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10245, 0, -2.40011)
+
+[node name="DinoEnemy8" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.06308, 0, -8.6774)
+
+[node name="DinoEnemy9" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.06308, 0, 2.46931)
+
+[node name="DinoEnemy10" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7125, 0, 5.63846)
+
+[node name="DinoEnemy11" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01904, 0, 2.14634)
+
+[node name="DinoEnemy12" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.66295, 0, -0.774372)
+
+[node name="DinoEnemy13" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.66295, 0, 3.49668)
+
+[node name="DinoEnemy14" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06658, 0, 3.49668)
+
+[node name="DinoEnemy15" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.33252, 0, -4.27603)
+
+[node name="DinoEnemy16" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.32127, 0, -0.253773)
+
+[node name="DinoEnemy17" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.91659, 0, -0.253773)
+
+[node name="DinoEnemy18" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0821, 0, -6.53106)
+
+[node name="DinoEnemy19" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.0821, 0, 4.61565)
+
+[node name="DinoEnemy20" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30654, 0, 7.7848)
+
+[node name="DinoEnemy21" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.46473, 0, -2.12735)
+
+[node name="DinoEnemy22" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.10864, 0, -5.04806)
+
+[node name="DinoEnemy23" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.10864, 0, -0.777014)
+
+[node name="DinoEnemy24" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62089, 0, -0.777014)
+
+[node name="DinoEnemy25" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.77821, 0, -8.54972)
+
+[node name="DinoEnemy26" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875582, 0, -4.52746)
+
+[node name="DinoEnemy27" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36228, 0, -4.52746)
+
+[node name="DinoEnemy28" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5278, 0, -10.8048)
+
+[node name="DinoEnemy29" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5278, 0, 0.341957)
+
+[node name="DinoEnemy30" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75223, 0, 3.51111)
+
+[node name="DinoEnemy31" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48377, 0, 0.0189857)
+
+[node name="DinoEnemy32" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12768, 0, -2.90173)
+
+[node name="DinoEnemy33" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12768, 0, 1.36932)
+
+[node name="DinoEnemy34" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39815, 0, 1.36932)
+
+[node name="DinoEnemy35" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.79725, 0, -6.40339)
+
+[node name="DinoEnemy36" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.14346, 0, -2.38113)
+
+[node name="DinoEnemy37" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38132, 0, -2.38113)
+
+[node name="DinoEnemy38" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5468, 0, -8.65841)
+
+[node name="DinoEnemy39" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5468, 0, 2.4883)
+
+[node name="DinoEnemy40" parent="." instance=ExtResource("1_grwmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.77127, 0, 5.65744)

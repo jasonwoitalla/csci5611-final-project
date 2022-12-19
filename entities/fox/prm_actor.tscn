@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4qd4n1pwajji"]
+
+[ext_resource type="Script" path="res://entities/fox/prm_actor.gd" id="1_hdt4i"]
+[ext_resource type="PackedScene" uid="uid://qc4y5vumrpji" path="res://entities/fox/Fox.gltf" id="1_ylxk1"]
+[ext_resource type="PackedScene" uid="uid://dojtjms06kcj2" path="res://scripts/scenes/inspectable.tscn" id="3_8x1bq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gs7y4"]
+size = Vector3(0.718766, 2.7855, 4.74222)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6tpf1"]
+animation = &"Gallop"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tn2s8"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d3jql"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4u2as"]
+advance_expression = "actual_speed > RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wnvxv"]
+advance_expression = "actual_speed < RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4ay5y"]
+states/Gallop/node = SubResource("AnimationNodeAnimation_6tpf1")
+states/Gallop/position = Vector2(529, 100)
+states/Idle/node = SubResource("AnimationNodeAnimation_tn2s8")
+states/Idle/position = Vector2(346, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_d3jql"), "Idle", "Gallop", SubResource("AnimationNodeStateMachineTransition_4u2as"), "Gallop", "Idle", SubResource("AnimationNodeStateMachineTransition_wnvxv")]
+graph_offset = Vector2(-92, -24)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_ulgsx"]
+
+[node name="PRMActor" type="CharacterBody3D"]
+script = ExtResource("1_hdt4i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.712328, 0)
+shape = SubResource("BoxShape3D_gs7y4")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Fox" parent="Model" instance=ExtResource("1_ylxk1")]
+
+[node name="Skeleton3D" parent="Model/Fox/AnimalArmature" index="0"]
+bones/0/position = Vector3(-1.22016e-10, 0.462864, 0.00569344)
+bones/0/rotation = Quaternion(-0.00192699, -2.96804e-28, 7.83697e-19, 0.999998)
+bones/1/rotation = Quaternion(0.772403, -7.98055e-07, -9.73696e-07, 0.635133)
+bones/3/rotation = Quaternion(-0.0059659, -2.06927e-05, 1.64095e-07, 0.999982)
+bones/4/rotation = Quaternion(0.105914, 2.09239e-05, -2.89451e-06, 0.994375)
+bones/5/rotation = Quaternion(0.0780957, -0.00270515, 0.0185859, 0.996769)
+bones/6/rotation = Quaternion(0.0301072, 0.00343468, 0.00941092, 0.999497)
+bones/7/rotation = Quaternion(-0.0565492, 0.00568305, 0.0145327, 0.998278)
+bones/8/rotation = Quaternion(-0.269803, 0.0158553, -0.00641173, 0.962764)
+bones/10/rotation = Quaternion(0.0695383, 0.492068, -0.0502125, 0.866321)
+bones/11/rotation = Quaternion(-0.0538198, -0.0210341, -0.0174763, 0.998176)
+bones/15/rotation = Quaternion(-0.0538197, 0.0210342, 0.0174764, 0.998176)
+bones/18/rotation = Quaternion(0.743402, 0.65871, -0.0580481, -0.100425)
+bones/19/rotation = Quaternion(-4.36363e-07, 0.977461, -0.211117, 2.0539e-06)
+bones/21/rotation = Quaternion(0.743392, -0.658704, 0.0581159, -0.100501)
+bones/22/rotation = Quaternion(4.24634e-07, 0.977479, -0.211035, -2.17001e-06)
+bones/23/rotation = Quaternion(0.569481, 0.519598, 0.421108, -0.477889)
+bones/24/rotation = Quaternion(0.718941, 0.645631, 0.171874, 0.191689)
+bones/25/rotation = Quaternion(0.706602, -0.000237459, 0.000866314, 0.707611)
+bones/26/rotation = Quaternion(-0.000345887, 0.766897, -0.64177, -0.000283347)
+bones/27/rotation = Quaternion(0.569479, -0.519599, -0.421109, -0.477888)
+bones/28/rotation = Quaternion(0.718952, -0.645604, -0.171885, 0.191726)
+bones/29/rotation = Quaternion(0.706604, 0.000237541, -0.000866557, 0.707609)
+bones/30/rotation = Quaternion(0.000345822, 0.766898, -0.641769, 0.000283304)
+bones/31/rotation = Quaternion(0.978573, -2.39283e-07, -1.34841e-06, -0.205901)
+bones/33/rotation = Quaternion(0.00208096, -7.43673e-10, 2.28631e-08, 0.999998)
+bones/34/rotation = Quaternion(0.0246163, 4.96008e-06, 4.77239e-06, 0.999697)
+bones/35/rotation = Quaternion(0.124655, 2.76627e-07, -2.10251e-07, 0.9922)
+bones/36/rotation = Quaternion(0.164576, -7.4751e-08, -9.32251e-08, 0.986364)
+bones/37/rotation = Quaternion(0.0279095, 1.2627e-08, -1.17841e-07, 0.999611)
+bones/38/rotation = Quaternion(0.227415, -7.20309e-08, -3.07333e-07, 0.973798)
+bones/43/rotation = Quaternion(0.918441, -1.28889e-07, -2.99266e-07, 0.395558)
+bones/47/rotation = Quaternion(0.918441, 1.28889e-07, 2.99266e-07, 0.395558)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_4ay5y")
+anim_player = NodePath("../Model/Fox/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_ulgsx")
+
+[node name="Inspectable" parent="." instance=ExtResource("3_8x1bq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06212, 0)
+inspect_name = "Restless Fox"
+inspect_description = "The restless fox is a creature that always needs to run from place to place. Simulating her time as a forest dealer, the Restless Fox uses the PRM algorithm to run to an end goal while avoiding obstacles. The restless fox always needs to be moving and only takes a break for a little while, after reaching her destination. "
+
+[editable path="Model/Fox"]

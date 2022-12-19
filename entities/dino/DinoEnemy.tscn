@@ -1,0 +1,102 @@
+[gd_scene load_steps=12 format=3 uid="uid://4xsuoljkogq5"]
+
+[ext_resource type="Script" path="res://entities/dino/DinoEnemy.gd" id="1_5mvju"]
+[ext_resource type="PackedScene" uid="uid://bew6wv2do7rfu" path="res://entities/dino/Dino.glb" id="1_25ka0"]
+[ext_resource type="PackedScene" uid="uid://dojtjms06kcj2" path="res://scripts/scenes/inspectable.tscn" id="3_n1nbh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6se8j"]
+height = 1.45856
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6m1ql"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v8tvw"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_elsdw"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_604t0"]
+advance_expression = "actual_speed > RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xwnq0"]
+advance_expression = "actual_speed < RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_go2xm"]
+states/Idle/node = SubResource("AnimationNodeAnimation_6m1ql")
+states/Idle/position = Vector2(401, 100)
+states/Run/node = SubResource("AnimationNodeAnimation_v8tvw")
+states/Run/position = Vector2(575, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_elsdw"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_604t0"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_xwnq0")]
+graph_offset = Vector2(-59, 3)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_wa3xl"]
+
+[node name="DinoEnemy" type="CharacterBody3D"]
+script = ExtResource("1_5mvju")
+speed = 4.0
+seperation = 4.0
+attraction = 0.9
+alignment = 0.9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.721971, 0)
+shape = SubResource("CapsuleShape3D_6se8j")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Dino" parent="Model" instance=ExtResource("1_25ka0")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Dino/CharacterArmature" index="0"]
+bones/2/position = Vector3(0.00215298, 0.84269, 0.167574)
+bones/4/rotation = Quaternion(0.166832, 4.319e-07, 1.0312e-07, 0.985985)
+bones/5/rotation = Quaternion(0.089564, -8.28598e-07, 1.5999e-08, 0.995981)
+bones/6/rotation = Quaternion(0.351925, 9.69401e-07, 1.50234e-07, 0.936028)
+bones/7/rotation = Quaternion(-0.38121, -0.000255004, 0.000104593, 0.924489)
+bones/8/position = Vector3(0.179022, 0.273201, 0.0460431)
+bones/8/rotation = Quaternion(-0.137972, -0.024918, -0.410095, 0.901202)
+bones/9/rotation = Quaternion(-0.520466, -0.503343, -0.480823, 0.494541)
+bones/10/rotation = Quaternion(0.0147614, 0.266242, -0.210527, 0.940519)
+bones/13/rotation = Quaternion(-0.106641, -0.000921954, 0.00859735, 0.99426)
+bones/15/rotation = Quaternion(-0.112771, 0.000769948, 0.014515, 0.993515)
+bones/16/rotation = Quaternion(0.0205575, -0.000990941, -0.00125043, 0.999787)
+bones/19/rotation = Quaternion(-0.0766122, -0.00152706, -0.0198675, 0.996862)
+bones/20/rotation = Quaternion(-0.0137146, -0.0297074, -0.677202, 0.735069)
+bones/22/position = Vector3(-0.177746, 0.273201, 0.0460433)
+bones/22/rotation = Quaternion(-0.137972, 0.0249185, 0.410095, 0.901202)
+bones/23/rotation = Quaternion(-0.520466, 0.503343, 0.480823, 0.494541)
+bones/24/rotation = Quaternion(0.0147614, -0.266242, 0.210527, 0.940519)
+bones/26/rotation = Quaternion(-0.0283749, 0.00482239, 0.167482, 0.985455)
+bones/29/rotation = Quaternion(-0.112771, -0.000769949, -0.014515, 0.993515)
+bones/30/rotation = Quaternion(0.0205574, 0.000990941, 0.00125043, 0.999787)
+bones/32/rotation = Quaternion(0.0422539, -0.0256417, -0.232305, 0.971386)
+bones/33/rotation = Quaternion(-0.0766121, 0.00152706, 0.0198675, 0.996862)
+bones/36/rotation = Quaternion(0.966569, 0.00882892, 0.00204299, 0.256247)
+bones/36/scale = Vector3(0.999976, 0.99999, 0.999925)
+bones/37/rotation = Quaternion(0.507749, 0.00622767, 0.00857389, 0.86144)
+bones/37/scale = Vector3(1.00001, 1.00005, 1)
+bones/38/rotation = Quaternion(0.966569, -0.00882902, -0.00204212, 0.256247)
+bones/38/scale = Vector3(0.999976, 0.999991, 0.999925)
+bones/39/rotation = Quaternion(0.507749, -0.00622769, -0.00857393, 0.86144)
+bones/39/scale = Vector3(1.00001, 1.00005, 1)
+bones/41/rotation = Quaternion(-1.20779e-05, 0.705806, 0.708405, -1.16644e-05)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_go2xm")
+anim_player = NodePath("../Model/Dino/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_wa3xl")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Inspectable" parent="." instance=ExtResource("3_n1nbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0738, 0)
+inspect_name = "Scared Dino"
+inspect_description = "The scared Dino is powered by the BOIDS algorithm! They like to stick around in a close radius and randomly select a location to run over to. They are scared of anything that moves! They will avoid each other and especially try to avoid you as you approach them."
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+
+[editable path="Model/Dino"]

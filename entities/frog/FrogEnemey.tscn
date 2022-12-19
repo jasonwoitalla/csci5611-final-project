@@ -1,0 +1,115 @@
+[gd_scene load_steps=17 format=3 uid="uid://rhwg7j5b2o1p"]
+
+[ext_resource type="PackedScene" uid="uid://du3j5tslxct3e" path="res://entities/frog/frog.tscn" id="1_8jqsx"]
+[ext_resource type="Script" path="res://entities/frog/FrogEnemey.gd" id="1_smmdn"]
+[ext_resource type="PackedScene" uid="uid://dojtjms06kcj2" path="res://scripts/scenes/inspectable.tscn" id="3_fc0v1"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ly861"]
+height = 1.41174
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jg00o"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_y1lju"]
+animation = &"Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mgvwg"]
+animation = &"Jump_Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_26git"]
+animation = &"Jump_Land"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_osfsg"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6yt6g"]
+advance_expression = "jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ciid4"]
+advance_expression = "velocity.y < -2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_77y6h"]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o7qkj"]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n5g8m"]
+advance_expression = "is_on_floor()"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pcdci"]
+states/Idle/node = SubResource("AnimationNodeAnimation_jg00o")
+states/Idle/position = Vector2(329, 6)
+states/Jump/node = SubResource("AnimationNodeAnimation_y1lju")
+states/Jump/position = Vector2(546, -83)
+states/Jump_Idle/node = SubResource("AnimationNodeAnimation_mgvwg")
+states/Jump_Idle/position = Vector2(546, 20)
+states/Jump_Land/node = SubResource("AnimationNodeAnimation_26git")
+states/Jump_Land/position = Vector2(546, 119)
+states/Start/position = Vector2(138, 6)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_osfsg"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_6yt6g"), "Idle", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_ciid4"), "Jump_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_77y6h"), "Jump", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_o7qkj"), "Jump_Idle", "Jump_Land", SubResource("AnimationNodeStateMachineTransition_n5g8m")]
+graph_offset = Vector2(-85, -112)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_jf8hn"]
+
+[node name="Frog" type="CharacterBody3D"]
+script = ExtResource("1_smmdn")
+speed = 3.5
+jump_speed = 18.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.685941, 0)
+shape = SubResource("CapsuleShape3D_ly861")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Frog" parent="Model" instance=ExtResource("1_8jqsx")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Frog/CharacterArmature" index="0"]
+bones/2/position = Vector3(0.00215298, 0.876873, 0.167574)
+bones/4/rotation = Quaternion(0.166832, 4.319e-07, 1.0312e-07, 0.985985)
+bones/5/rotation = Quaternion(0.0460704, -8.31723e-07, 1.31106e-08, 0.998938)
+bones/6/rotation = Quaternion(0.351925, 9.69401e-07, 1.50234e-07, 0.936028)
+bones/7/rotation = Quaternion(-0.317919, -0.000261522, 8.72275e-05, 0.948118)
+bones/8/position = Vector3(0.195749, 0.272621, 0.0439718)
+bones/8/rotation = Quaternion(-0.170184, 0.0487822, -0.417703, 0.891169)
+bones/9/rotation = Quaternion(-0.520466, -0.503343, -0.480823, 0.494541)
+bones/10/rotation = Quaternion(-0.0356467, 0.26748, -0.215308, 0.938523)
+bones/18/rotation = Quaternion(0.042254, 0.0256417, 0.232305, 0.971387)
+bones/19/rotation = Quaternion(-0.0766122, -0.00152705, -0.0198675, 0.996862)
+bones/21/rotation = Quaternion(-0.0116281, 0.00252356, 0.212192, 0.977155)
+bones/22/position = Vector3(-0.194472, 0.272621, 0.0439721)
+bones/22/rotation = Quaternion(-0.170183, -0.0487816, 0.417703, 0.891169)
+bones/23/rotation = Quaternion(-0.520466, 0.503343, 0.480823, 0.494541)
+bones/24/rotation = Quaternion(-0.0356468, -0.26748, 0.215308, 0.938523)
+bones/29/rotation = Quaternion(-0.112771, -0.000769946, -0.014515, 0.993515)
+bones/33/rotation = Quaternion(-0.0766122, 0.00152705, 0.0198675, 0.996862)
+bones/36/rotation = Quaternion(0.976399, 0.00948379, 0.00153508, 0.215762)
+bones/36/scale = Vector3(0.999976, 0.99999, 0.999925)
+bones/37/rotation = Quaternion(0.439875, 0.00554862, 0.00902819, 0.897997)
+bones/37/scale = Vector3(1.00001, 1.00005, 1)
+bones/38/rotation = Quaternion(0.976399, -0.00948387, -0.00153421, 0.215762)
+bones/38/scale = Vector3(0.999976, 0.999991, 0.999925)
+bones/39/rotation = Quaternion(0.439875, -0.00554864, -0.00902823, 0.897997)
+bones/39/scale = Vector3(1.00001, 1.00005, 1)
+bones/41/rotation = Quaternion(-1.20779e-05, 0.705806, 0.708405, -1.16644e-05)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_pcdci")
+anim_player = NodePath("../Model/Frog/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_jf8hn")
+
+[node name="Inspectable" parent="." instance=ExtResource("3_fc0v1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.94822, 0)
+inspect_name = "Large Hopping Frog"
+inspect_description = "These creatures are able to jump like no other! They follow a carefully scripted set of behaviors that tells them what direction to jump towards. They don’t like walking normally, so they jump high in the air to get horizontal velocity. They can live around large pits and rivers and will always be able to jump to safety. If they stray too far from home, they will always head back to that direction."
+
+[connection signal="animation_changed" from="Model/Frog/AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
+[connection signal="animation_finished" from="Model/Frog/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+
+[editable path="Model/Frog"]

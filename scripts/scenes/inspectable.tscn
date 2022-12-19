@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dojtjms06kcj2"]
+
+[ext_resource type="Script" path="res://scripts/inspectable.gd" id="1_1j38h"]
+[ext_resource type="Shader" uid="uid://s188v4tr8n11" path="res://entities/dino/RotateAndBounce.tres" id="1_luhsb"]
+[ext_resource type="Texture2D" uid="uid://d0b6oenamqxxg" path="res://ui/pointer.png" id="2_huvbi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v1hd7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tctns"]
+render_priority = 0
+shader = ExtResource("1_luhsb")
+shader_parameter/Texture = ExtResource("2_huvbi")
+
+[node name="Inspectable" type="Area3D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_1j38h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v1hd7")
+
+[node name="Marker" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_tctns")
+texture = ExtResource("2_huvbi")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

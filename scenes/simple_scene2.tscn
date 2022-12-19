@@ -1,0 +1,250 @@
+[gd_scene load_steps=22 format=3]
+
+[ext_resource type="PackedScene" uid="uid://ch1rqa0wsowvq" path="res://entities/player/player.tscn" id="1_nmvyb"]
+[ext_resource type="Script" path="res://scenes/MouseOrbit.gd" id="2_pp17y"]
+[ext_resource type="PackedScene" uid="uid://by8k5bnaq232l" path="res://water/ocean.tscn" id="3_4ccjw"]
+[ext_resource type="PackedScene" uid="uid://1otasp8fgynt" path="res://assets/buildings/BuildingLarge.tscn" id="5_w33oo"]
+[ext_resource type="PackedScene" uid="uid://bwudaf6yghuo3" path="res://water/Water.tscn" id="5_yfaeg"]
+[ext_resource type="PackedScene" uid="uid://d2445cvlnd5ib" path="res://assets/trees/PalmTree4.tscn" id="6_6asao"]
+[ext_resource type="PackedScene" uid="uid://bqclpnqhh3ygv" path="res://terrain/terrain.tscn" id="6_hcp8m"]
+[ext_resource type="PackedScene" uid="uid://7xvl3mc6gwxm" path="res://assets/trees/PalmTree3.tscn" id="6_vtq3p"]
+[ext_resource type="PackedScene" uid="uid://cg0u6j6tmtpf0" path="res://assets/trees/PalmTree2.tscn" id="6_wefiu"]
+[ext_resource type="PackedScene" uid="uid://1ndihqak42vl" path="res://assets/docks/DockLong.tscn" id="7_g88dr"]
+[ext_resource type="PackedScene" uid="uid://i6l31746typy" path="res://assets/farm/fence2.tscn" id="8_l6t51"]
+[ext_resource type="PackedScene" uid="uid://di8sdkgr1xm2n" path="res://entities/frog/frog_group.tscn" id="10_r5gh1"]
+[ext_resource type="PackedScene" uid="uid://4xsuoljkogq5" path="res://entities/dino/DinoEnemy.tscn" id="12_615pl"]
+[ext_resource type="PackedScene" uid="uid://g4glruarekcc" path="res://entities/zoo_keeper/ZooKeeper.tscn" id="13_lxkoq"]
+[ext_resource type="PackedScene" uid="uid://bbetfpgxgvld0" path="res://entities/fish/Fish.tscn" id="14_43qyp"]
+, 0.629505, 0.670505, 1)
+
+[sub_resource type="Sky" id="Sky_qjl35"]
+sky_material = SubResource("ProceduralSkyMaterial_k2mui")
+
+[sub_resource type="Environment" id="Environment_x61gu"]
+background_mode = 2
+sky = SubResource("Sky_qjl35")
+ambient_light_color = Color(0.333333, 0.4, 0.65098, 1)
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.235294, 0.4, 0.607843, 1)
+fog_light_energy = 0.75
+fog_density = 0.001
+fog_sky_affect = 0.75
+volumetric_fog_density = 0.009
+volumetric_fog_albedo = Color(0.627451, 0.854902, 1, 1)
+volumetric_fog_emission = Color(0.635294, 0.705882, 1, 1)
+volumetric_fog_emission_energy = 0.1
+volumetric_fog_length = 128.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jg717"]
+size = Vector3(0.1, 21.6294, 203.566)
+
+[sub_resource type="Curve3D" id="Curve3D_axeqq"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -16.118, 0.374915, -0.256378, 0, 0, 0, 0, 0, 0, -35.5108, -0.185687, 1.23425, 0, 0, 0, 0, 0, 0, -47.3736, -0.874395, -7.77946, 0, 0, 0, 0, 0, 0, -52.0704, -0.144596, -23.4187, 0, 0, 0, 0, 0, 0, -49.4075, -0.03249, -30.1525, 0, 0, 0, 0, 0, 0, -48.5065, 1.43547, -44.2483, 0, 0, 0, 0, 0, 0, -43.3705, 0.445786, -56.0397, 0, 0, 0, 0, 0, 0, -58.2204, 0.157307, -63.3317, 0, 0, 0, 0, 0, 0, -43.589, -0.341755, -81.969),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 10
+
+[node name="SimpleScene" type="Node3D"]
+
+[node name="Effects" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Effects"]
+environment = SubResource("Environment_x61gu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Effects"]
+transform = Transform3D(1, 0, 0, 0, 0.780845, 0.624725, 0, -0.624725, 0.780845, 0.649241, 5.44576, 3.02244)
+
+[node name="Envrionment" type="Node" parent="."]
+
+[node name="Terrain" parent="Envrionment" instance=ExtResource("6_hcp8m")]
+
+[node name="Water" parent="Envrionment" instance=ExtResource("5_yfaeg")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 50.9766, 4.50172, -51.952)
+visible = false
+
+[node name="Ocean" parent="Envrionment" instance=ExtResource("3_4ccjw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.12012, 0)
+
+[node name="Billboards" type="Node" parent="Envrionment"]
+
+[node name="BoundingSpace" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="BoundingSpace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -99.723, 14, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoundingSpace/StaticBody3D"]
+shape = SubResource("BoxShape3D_jg717")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="BoundingSpace"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.125, 14, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoundingSpace/StaticBody3D3"]
+shape = SubResource("BoxShape3D_jg717")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="BoundingSpace"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.051, 14, -99.55)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoundingSpace/StaticBody3D2"]
+shape = SubResource("BoxShape3D_jg717")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="BoundingSpace"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.051, 14, 101.247)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BoundingSpace/StaticBody3D4"]
+shape = SubResource("BoxShape3D_jg717")
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="PalmTree_3" parent="Objects" instance=ExtResource("6_vtq3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.2063, 5.85889, -28.3311)
+
+[node name="PalmTree_5" parent="Objects" instance=ExtResource("6_vtq3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 71.8945, 5.85889, -62.1083)
+
+[node name="PalmTree_4" parent="Objects" instance=ExtResource("6_6asao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.9838, 4.63507, -68.6069)
+
+[node name="Buildings" type="Node" parent="Objects"]
+
+[node name="Building1_Large" parent="Objects/Buildings" instance=ExtResource("5_w33oo")]
+transform = Transform3D(-0.918128, 0, -0.396283, 0, 1, 0, 0.396283, 0, -0.918128, 25.1465, 6.55179, 56.826)
+
+[node name="PalmTree_2" parent="Objects" instance=ExtResource("6_wefiu")]
+transform = Transform3D(-0.83323, 0, 0.552926, 0, 1, 0, -0.552926, 0, -0.83323, 39.2747, 6.51637, 32.5172)
+
+[node name="PalmTree_6" parent="Objects" instance=ExtResource("6_wefiu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.2107, 6.51637, 26.2308)
+
+[node name="PalmTree_7" parent="Objects" instance=ExtResource("6_wefiu")]
+transform = Transform3D(0.745825, 0, -0.666142, 0, 1, 0, 0.666142, 0, 0.745825, 6.78191, 6.51637, 47.2151)
+
+[node name="PalmTree_8" parent="Objects" instance=ExtResource("6_wefiu")]
+transform = Transform3D(0.775452, 0, 0.631407, 0, 1, 0, -0.631407, 0, 0.775452, -0.670957, 6.51637, 47.2151)
+
+[node name="PalmTree_9" parent="Objects" instance=ExtResource("6_vtq3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8782, 5.8834, 23.8465)
+
+[node name="PalmTree_10" parent="Objects" instance=ExtResource("6_vtq3p")]
+transform = Transform3D(0.529179, 0, 0.84851, 0, 1, 0, -0.84851, 0, 0.529179, -6.65314, 5.8834, 55.0392)
+
+[node name="PalmTree_12" parent="Objects" instance=ExtResource("6_6asao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.2253, 7.11829, -63.3899)
+
+[node name="PalmTree_13" parent="Objects" instance=ExtResource("6_6asao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.0354, 7.88474, -78.2576)
+
+[node name="PalmTree_14" parent="Objects" instance=ExtResource("6_wefiu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.7073, 6.0278, -59.7058)
+
+[node name="PalmTree_11" parent="Objects" instance=ExtResource("6_vtq3p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.7182, 8.27222, -69.3411)
+
+[node name="Fences" type="Node" parent="Objects"]
+
+[node name="Fence2" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -28.6474, 6.34172, 24.953)
+
+[node name="Fence4" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -28.6474, 6.34172, 41.953)
+
+[node name="Fence3" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -28.6474, 6.34172, 7.95296)
+
+[node name="Fence5" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -79.9109, 6.34172, 24.953)
+
+[node name="Fence6" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -79.9109, 6.34172, 41.953)
+
+[node name="Fence7" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -79.9109, 6.34172, 7.95297)
+
+[node name="Fence8" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -71.2783, 6.34172, -0.570141)
+
+[node name="Fence9" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -54.2783, 6.34172, -0.570142)
+
+[node name="Fence10" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -37.2783, 6.34172, -0.570144)
+
+[node name="Fence11" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -71.2783, 6.34172, 50.2388)
+
+[node name="Fence12" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -54.2783, 6.34172, 50.2388)
+
+[node name="Fence13" parent="Objects/Fences" instance=ExtResource("8_l6t51")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -37.2783, 6.34172, 50.2388)
+
+[node name="PRM" type="Node" parent="Objects"]
+
+[node name="Dock_Long" parent="." instance=ExtResource("7_g88dr")]
+transform = Transform3D(0.94317, -0.0111627, -0.332122, 9.31323e-10, 0.999436, -0.0335913, 0.332309, 0.0316823, 0.942638, 61.5272, 2.57028, -16.8164)
+
+[node name="Player" parent="." instance=ExtResource("1_nmvyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.04836, 10.0918, -1.29031)
+speed = 10.0
+jump_speed = 14.0
+camera = NodePath("Camera3D")
+
+[node name="CamTarget" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.91578, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.924493, 0.381199, 0, -0.381199, 0.924493, -2.04836, 0.79468, 7.26205)
+top_level = true
+fov = 55.0
+near = 0.2
+far = 900.0
+script = ExtResource("2_pp17y")
+target = NodePath("../CamTarget")
+distance = 9.0
+x_speed = 200.0
+y_max_limit = 75.0
+
+[node name="Entites" type="Node" parent="."]
+
+[node name="FrogGroup" parent="Entites" instance=ExtResource("10_r5gh1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.1426, 7.09642, -41.0673)
+
+[node name="Frog" parent="Entites/FrogGroup" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.958405, 0, -6.14041)
+
+[node name="Frog2" parent="Entites/FrogGroup" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60164, 0, -16.6843)
+
+[node name="Frog4" parent="Entites/FrogGroup" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.7516, 0, 8.03845)
+
+[node name="DinoGroup" type="Node3D" parent="Entites"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.6899, 8.46377, -50.8417)
+
+[node name="DinoEnemy" parent="Entites/DinoGroup" instance=ExtResource("12_615pl")]
+
+[node name="DinoEnemy2" parent="Entites/DinoGroup" instance=ExtResource("12_615pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.22729, 0, 0)
+
+[node name="DinoEnemy3" parent="Entites/DinoGroup" instance=ExtResource("12_615pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.36944, 0, 0)
+
+[node name="DinoEnemy4" parent="Entites/DinoGroup" instance=ExtResource("12_615pl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.34754, 0, 8.51202)
+
+[node name="ZooKeeper" parent="Entites" instance=ExtResource("13_lxkoq")]
+transform = Transform3D(-0.864406, 0, -0.502794, 0, 1, 0, 0.502794, 0, -0.864406, 24.0214, 6.57641, 41.7865)
+
+[node name="WaterRoute" type="Path3D" parent="Entites"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 96.8832, 2.06121, -13.01)
+curve = SubResource("Curve3D_axeqq")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Entites/WaterRoute"]
+transform = Transform3D(0.999996, 0, 0, 0, 0.999991, 0, 0, 0, 0.999994, 0, 0, 0)
+
+[node name="Fish" parent="Entites/WaterRoute/PathFollow3D" instance=ExtResource("14_43qyp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.824753, 0.28625, -0.423185)
+
+[editable path="Entites/FrogGroup"]

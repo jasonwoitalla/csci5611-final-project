@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://dtq4td84tnhp1"]
+
+[ext_resource type="PackedScene" uid="uid://sgvmbew2xsl6" path="res://entities/cow/Cow.gltf" id="1_agf57"]
+[ext_resource type="Script" path="res://entities/cow/ttc.gd" id="1_vvnn6"]
+[ext_resource type="PackedScene" uid="uid://dojtjms06kcj2" path="res://scripts/scenes/inspectable.tscn" id="2_rytw0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jvy0r"]
+size = Vector3(1.24349, 3.74584, 5.87077)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rrwoy"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_duhjr"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f681n"]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w6hfp"]
+advance_expression = "actual_speed > RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_amlfu"]
+advance_expression = "actual_speed < RUN_VELOCITY"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qqcqi"]
+states/Idle/node = SubResource("AnimationNodeAnimation_rrwoy")
+states/Idle/position = Vector2(366, 100)
+states/Walk/node = SubResource("AnimationNodeAnimation_duhjr")
+states/Walk/position = Vector2(574, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_f681n"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_w6hfp"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_amlfu")]
+graph_offset = Vector2(-18, -10)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_vpoop"]
+
+[node name="TTCCow" type="CharacterBody3D"]
+script = ExtResource("1_vvnn6")
+radius = 3.0
+k_avoid = 25.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80851, 0.783024)
+shape = SubResource("BoxShape3D_jvy0r")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="Cow" parent="Model" instance=ExtResource("1_agf57")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Model/Cow/AnimalArmature" index="0"]
+bones/0/position = Vector3(0, 0.908297, 0.00363558)
+bones/0/rotation = Quaternion(-0.000862474, 0, 0, 1)
+bones/1/rotation = Quaternion(0.828311, -5.78504e-07, -8.57564e-07, 0.560268)
+bones/3/rotation = Quaternion(0.205444, -2.37109e-05, -5.9217e-06, 0.978669)
+bones/4/rotation = Quaternion(0.0204016, 2.41414e-05, -5.95922e-07, 0.999792)
+bones/5/rotation = Quaternion(0.239786, -0.0137619, -0.0201978, 0.970518)
+bones/6/rotation = Quaternion(-0.107507, -0.00286823, -0.00964841, 0.994153)
+bones/7/rotation = Quaternion(0.0163716, 0.000123129, 0.00035947, 0.999866)
+bones/8/rotation = Quaternion(-0.479793, 0.0254559, -0.0303386, 0.876488)
+bones/9/rotation = Quaternion(-0.463943, 0.529065, 0.534218, 0.468463)
+bones/10/rotation = Quaternion(0.751459, 0.658999, 0.0211627, 0.024132)
+bones/11/rotation = Quaternion(2.04566e-07, 0.995455, 0.0952334, 2.21117e-06)
+bones/12/rotation = Quaternion(0.463971, 0.52904, 0.534194, -0.468491)
+bones/13/rotation = Quaternion(0.751459, -0.658999, -0.0211646, 0.0241342)
+bones/14/rotation = Quaternion(-2.03997e-07, 0.995454, 0.0952407, -2.21117e-06)
+bones/15/rotation = Quaternion(0.612888, 0.557983, 0.382196, -0.408594)
+bones/16/rotation = Quaternion(0.726926, 0.670014, 0.101859, 0.110838)
+bones/17/rotation = Quaternion(0.524277, -0.000139428, 0.000915864, 0.851547)
+bones/18/rotation = Quaternion(-0.000399186, 0.891171, -0.453667, -0.000200416)
+bones/19/rotation = Quaternion(0.612887, -0.557984, -0.382198, -0.408593)
+bones/20/rotation = Quaternion(0.726925, -0.670014, -0.101859, 0.110837)
+bones/21/rotation = Quaternion(0.524277, 0.000139468, -0.000915811, 0.851547)
+bones/22/rotation = Quaternion(0.000399205, 0.891171, -0.453667, 0.000200418)
+bones/24/rotation = Quaternion(-0.54016, -3.80361e-09, 9.52838e-08, 0.841562)
+bones/25/rotation = Quaternion(-0.298865, -0.0548161, -0.0750534, 0.949759)
+bones/26/rotation = Quaternion(-0.196591, -0.0144187, -0.113145, 0.973829)
+bones/27/rotation = Quaternion(0.0194527, 0.000418102, -0.00788543, 0.99978)
+bones/28/rotation = Quaternion(0.0336101, -6.51101e-09, 6.14462e-10, 0.999435)
+bones/29/rotation = Quaternion(0.0148587, -9.33517e-09, 1.4317e-08, 0.99989)
+
+[node name="Inspectable" parent="." instance=ExtResource("2_rytw0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.60754, 2.76029)
+inspect_name = "Slow Moving Cow"
+inspect_description = "The slow-moving Cow is a creature that doesn’t know much. They spend their days moving back and forth in a straight line. They like the consistency to their behavior. However, they don’t like running into other cows. For this reason, they use the TTC algorithm to avoid any collisions from themselves and another cow walking in the same straight line as them. "
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_qqcqi")
+anim_player = NodePath("../Model/Cow/AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_vpoop")
+
+[editable path="Model/Cow"]

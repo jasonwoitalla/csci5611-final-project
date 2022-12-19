@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5n0hwioch516"]
+
+[ext_resource type="PackedScene" uid="uid://cxb0xap6ux8dm" path="res://entities/fish/Betta.glb" id="1_xwipo"]
+
+[node name="Betta" instance=ExtResource("1_xwipo")]
+
+[node name="Skeleton3D" parent="Fish_Armature" index="0"]
+bones/0/rotation = Quaternion(-0.706575, -0.027482, -0.0274776, 0.70657)
+bones/1/rotation = Quaternion(-0.00848771, 0.0728574, -0.0260814, 0.996965)
+bones/2/rotation = Quaternion(-3.12201e-06, -3.12774e-06, -0.0199714, 0.999801)
+bones/3/rotation = Quaternion(-0.00798586, 0.000286665, -0.0294638, 0.999534)
+bones/4/rotation = Quaternion(0.00798678, -0.000202881, 0.0253941, 0.999646)
+bones/5/rotation = Quaternion(1.32264e-08, 2.04531e-08, 0.13967, 0.990198)

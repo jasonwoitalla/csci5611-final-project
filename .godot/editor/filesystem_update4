@@ -1,0 +1,11 @@
+res://scenes/zoo.tscn
+res://water/water.tres
+res://terrain/terrain.tres
+res://entities/dino/RotateAndBounce.tres
+res://ui/scenes/dialouge_box.tscn
+res://ui/scenes/InspectLabel.tscn
+res://entities/zoo_keeper/AdventurerCharacter.tscn
+res://entities/zoo_keeper/ZooKeeper.tscn
+res://water/ocean.tscn
+res://entities/frog/FrogEnemey.tscn
+res://entities/fox/prm_actor.tscn
